@@ -8,7 +8,7 @@ public class Policy
    private String firstName;     // The policyholder's first name
    private String lastName;      // The policyholder's last name
    private int age;              // The policyholder's age
-   private boolean smokingStatus;// The policyholder's smoking status smoker or non-smoker
+   private String smokingStatus;// The policyholder's smoking status smoker or non-smoker
    private double height;        // The policyholder's height in inches
    private double weight;        // The policyholder's weight in pounds
    
@@ -23,32 +23,32 @@ public class Policy
       firstName = "";
       lastName = "";
       age = 0;
-      smokingStatus = false;
+      smokingStatus = "";
       height = 0.0;
       weight = 0.0;
    }
 
       /**
       This constructor sets all fields to the value passed as an argument.
-      @param policyNum The policy number.
-      @param provider The provider's name.
-      @param firstName The policyholder's first name.
-      @param lastName The policyholder's last name.
-      @param age The policyholder's age.
-      @param smokingStatus The policyholder's smoking status smoker or non-smoker.
-      @param height The policyholder's height in inches.
-      @param weight The policyholder's weight in pounds.
+      @param policyNumber The policy number.
+      @param providerName The provider's name.
+      @param fName The policyholder's first name.
+      @param lName The policyholder's last name.
+      @param personAge The policyholder's age.
+      @param smokerStat The policyholder's smoking status smoker or non-smoker.
+      @param heightInInches The policyholder's height in inches.
+      @param weightInLbs The policyholder's weight in pounds.
    */
    
    public Policy(int policyNumber, String providerName, String fName, String lName,
-   int personAge, boolean smoker, double heightInInches, double weightInLbs)
+   int personAge, String smokerStat, double heightInInches, double weightInLbs)
     {
         policyNum = policyNumber;
         provider = providerName;
         firstName = fName;
         lastName = lName;
         age = personAge;
-        smokingStatus = smoker;
+        smokingStatus = smokerStat;
         height = heightInInches;
         weight = weightInLbs;
     }
@@ -154,21 +154,21 @@ public class Policy
     }
 
     /**
-        The isSmokingStatus method returns true for smoker and false for non-smoker.
-        @return True for smoker and False for non-smoker.
+        The getSmokingStatus method returns smoker or non-smoker.
+        @return Smoker or non-smoker.
      */
 
-    public boolean isSmokingStatus() 
+    public String getSmokingStatus() 
     {
         return smokingStatus;
     }
 
     /**
-        The setSmokingStatus method sets the boolean true for smoker and false for non-smoker.
-        @param smoking True for smoker and False for non-smoker.
+        The setSmokingStatus method sets the string to smoker or non-smoker.
+        @param smoking Smoker or non-smoker.
      */
 
-    public void setSmokingStatus(boolean smoking) 
+    public void setSmokingStatus(String smoking) 
     {
         smokingStatus = smoking;
     }
@@ -220,10 +220,10 @@ public class Policy
         @return The Body Mass Index.
      */
 
-    public double calculateBMI(double weight, double height)
+    public double calculateBMI(double weightPounds, double heightInches)
     {
         final int CONV_FACT = 703; // This conversion factor converts pounds to kg 
-        double bmi = (weight * CONV_FACT)/(Math.pow(height, 2)); // Body Mass Index calculation
+        double bmi = (weightPounds * CONV_FACT)/(Math.pow(heightInches, 2)); // Body Mass Index calculation
         return bmi;
     }
 
@@ -254,7 +254,7 @@ public class Policy
         } 
 
         // Adding additional fee if the policyholder is a smoker
-        if(smokingStatus = true) 
+        if(smokingStatus.compareTo("smoker") == 0) 
         {
             policyPrice += SMOKER_FEE;
         }
