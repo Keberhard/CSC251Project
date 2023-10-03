@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 /**
     This program asks and accepts a policyholder's information and creates an instance of the Policy class.
@@ -59,5 +60,7 @@ public class Project_Katie_Eberhard {
         System.out.printf("Policyholder's Weight: %.1f pounds\n", personWeight);
         System.out.printf("Policyholder's BMI: %.2f\n", personBMI);
         System.out.printf("Policy Price: $%.2f", policyCost);
+
+        keyboard.close();
     }
 }
