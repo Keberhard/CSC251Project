@@ -20,8 +20,8 @@ public class Project_Katie_Eberhard {
             String personSmokingStatus;     // smoker or non-smoker
             double personHeight;            // The policyholder's height in inches
             double personWeight;            // The policyholder's weight in pounds
-            double personBMI;               // The policyholder's Body Mass Index
-            double policyCost;              // The Cost of the insurance policy
+            double personBMI = 0;               // The policyholder's Body Mass Index
+            double policyCost = 0;              // The Cost of the insurance policy
 
             //Create instance of the File Class
             File aFile = new File("PolicyInformation.txt");
@@ -64,18 +64,36 @@ public class Project_Katie_Eberhard {
                 policies.add(policyEstimate);              
             } 
 
-            inputFile.close();          //Close file
+            //Close file
+            inputFile.close();     
+            
+            //Create smoking and nonsmoking accumulators
+            int smokers = 0;
+            int nonsmokers = 0;
 
-            System.out.printf("Policy Numer: %d\n", insPolicyNum);
-            System.out.printf("Provider Name: %s\n", insPolicyProvider);
-            System.out.printf("Policyholder's First Name: %s\n", personFirstName);
-            System.out.printf("Policyholder's Last Name: %s\n", personLastName);
-            System.out.printf("Policyholder's Age: %d\n", aAge);
-            System.out.printf("Policyholder's Smoking Status: %s\n", personSmokingStatus);
-            System.out.printf("Policyholder's Height: %.1f inches\n", personHeight);
-            System.out.printf("Policyholder's Weight: %.1f pounds\n", personWeight);
-            System.out.printf("Policyholder's BMI: %.2f\n", personBMI);
-            System.out.printf("Policy Price: $%.2f", policyCost);
+            //Create a for loop that displays all the Policy objects that are stored in ArrayList + BMI + policy cost
+            for(int i = 0; i < policies.size(); i++)
+            {
+                
+                
+                System.out.printf("Policy Numer: %d\n", policies.get(i).getPolicyNum());
+                System.out.printf("Provider Name: %s\n", policies.get(i).getProvider());
+                System.out.printf("Policyholder's First Name: %s\n", policies.get(i).getFirstName());
+                System.out.printf("Policyholder's Last Name: %s\n", policies.get(i).getLastName());
+                System.out.printf("Policyholder's Age: %d\n", policies.get(i).getAge());
+                System.out.printf("Policyholder's Smoking Status: %s\n", policies.get(i).getSmokingStatus());
+                if(policies.get(i).getSmokingStatus().compareTo("smoking") == 0)
+                     smokers++;
+                else
+                    nonsmokers++;
+                System.out.printf("Policyholder's Height: %.1f inches\n", policies.get(i).getHeight());
+                System.out.printf("Policyholder's Weight: %.1f pounds\n", policies.get(i).getWeight());
+                System.out.printf("Policyholder's BMI: %.2f\n", personBMI);
+                System.out.printf("Policy Price: $%.2f", policyCost);
+                System.out.println("The number of policies with a smoker is: " + smokers);
+                System.out.println("The number of policies with a non-smoker is: " + nonsmokers);
+
+            }
         }
         
         catch(IOException e)//If something goes wrong, an IOException is "thrown" to us, and we "catch" it and deal with it
