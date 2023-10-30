@@ -3,7 +3,7 @@
 */
 public class Policy
 {
-   private int policyNum;        // The policy number
+   private String policyNum;        // The policy number
    private String provider;      // The provider's name
    private String firstName;     // The policyholder's first name
    private String lastName;      // The policyholder's last name
@@ -18,7 +18,7 @@ public class Policy
    
    public Policy()
    {
-      policyNum = 0;
+      policyNum = "";
       provider = "";
       firstName = "";
       lastName = "";
@@ -40,7 +40,7 @@ public class Policy
       @param weightInLbs The policyholder's weight in pounds.
    */
    
-   public Policy(int policyNumber, String providerName, String fName, String lName,
+   public Policy(String policyNumber, String providerName, String fName, String lName,
    int personAge, String smokerStat, double heightInInches, double weightInLbs)
     {
         policyNum = policyNumber;
@@ -58,7 +58,7 @@ public class Policy
        @return The insurance policy number.
      */
 
-    public int getPolicyNum()
+    public String getPolicyNum()
     {
         return policyNum;
     }
@@ -68,7 +68,7 @@ public class Policy
        @param policyNumber The insurance policy number.
      */
 
-    public void setPolicyNum(int policyNumber)
+    public void setPolicyNum(String policyNumber)
     {
         policyNum = policyNumber;
     }
@@ -182,6 +182,7 @@ public class Policy
     {
         return height;
     }
+    
 
     /**
         The setHeight method sets policyholder's height in inches.
@@ -223,7 +224,7 @@ public class Policy
     public double calculateBMI(double weightPounds, double heightInches)
     {
         final int CONV_FACT = 703; // This conversion factor converts pounds to kg 
-        double bmi = (weightPounds * CONV_FACT)/(Math.pow(heightInches, 2)); // Body Mass Index calculation
+        double bmi = (weightPounds * CONV_FACT)/(heightInches * heightInches); // Body Mass Index calculation
         return bmi;
     }
 
@@ -233,8 +234,9 @@ public class Policy
         @return The cost of the insurance policy
      */
 
-    public double priceOfPolicy(double bmi)
+    public double priceOfPolicy()
     {
+        double bmi = calculateBMI(weight, height);
         final int BASE_FEE = 600;                       // Insurance policy base fee
         final int SMOKER_FEE = 100;                     // Additional fee if the policyholder is a smoker
         final int OVER_50_FEE = 75;                     // Additional fee if the policyholder is over the age of 50
