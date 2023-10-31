@@ -149,5 +149,15 @@ public class PolicyHolder {
          weight = weightInLbs;
      } 
  
+     public String toString()
+     {
+        String str = "Policyholder's First Name: " + firstName + 
+                     "\nPolicyholder's Last Name: " + lastName +
+                     "\nPolicyholder's Age: " + age +
+                     "\nPolicyholder's Smoking Status: " + smokingStatus +
+                     "\nPolicyholder's Height: " + height +
+                     "\nPolicyholder's Weight: " + weight;
+        return str;
+     }
     
 }
