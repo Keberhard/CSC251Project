@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+
 
 /**
    The Policy class will model an insurance policy. 
@@ -9,6 +8,8 @@ public class Policy
    private String policyNum;          // The policy number
    private String provider;           // The provider's name
    private PolicyHolder policyHolder; // 
+   private static int instanceCount = 0;
+   private static int smokers = 0;
    
 
 
@@ -30,6 +31,11 @@ public class Policy
         provider = providerName;
         
         policyHolder = new PolicyHolder(holder);
+        instanceCount++;
+        if (policyHolder.getSmokingStatus().equalsIgnoreCase("smoker"))
+        {
+            smokers++;
+        }
     }
 
     /**
@@ -70,6 +76,16 @@ public class Policy
     public void setProvider(String providerName) 
     {
         provider = providerName;
+    }
+
+    public int getInstanceCount()
+    {
+        return instanceCount;
+    }
+
+    public int getSmokerCount()
+    {
+        return smokers;
     }
 
     
