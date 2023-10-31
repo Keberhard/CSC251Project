@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 /**
    The Policy class will model an insurance policy. 
 */
@@ -92,7 +95,7 @@ public class Policy
 
     public double priceOfPolicy()
     {
-        double bmi = calculateBMI(policyHolder.getWeight(), policyHolder.getWeight());
+        double bmi = calculateBMI(policyHolder.getWeight(), policyHolder.getHeight());
         final int BASE_FEE = 600;                       // Insurance policy base fee
         final int SMOKER_FEE = 100;                     // Additional fee if the policyholder is a smoker
         final int OVER_50_FEE = 75;                     // Additional fee if the policyholder is over the age of 50
@@ -120,6 +123,17 @@ public class Policy
         return policyPrice;
     }
 
+    public String toString()
+    {
+        //Create a string to display the object
+        String str = String.format("Policy Numer: %s", getPolicyNum() +
+                        "\nProvider Name: " + getProvider()) + "\n" +
+                        policyHolder + 
+                        String.format("\nPolicyholder's BMI: %.2f", calculateBMI(policyHolder.getWeight(), policyHolder.getHeight())) +
+                        String.format("\nPolicy Price: $%.2f\n", priceOfPolicy());
+        return str; 
+
+    }
 
 
 
