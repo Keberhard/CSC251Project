@@ -6,7 +6,7 @@ import java.io.*;
     This program asks and accepts a policyholder's information and creates an instance of the Policy class.
     It them displays the information and cost of the policy. 
  */
-public class Project_Katie_Eberhard extends Policy {
+public class Project_Katie_Eberhard  {
     
     public static void main(String[] args)
     {
@@ -51,10 +51,12 @@ public class Project_Katie_Eberhard extends Policy {
                     inputFile.nextLine();
                 }
 
-        
+                //Create a PolicyHolder object
+                PolicyHolder pHolder = new PolicyHolder(personFirstName, personLastName, aAge, personSmokingStatus, personHeight, personWeight);
+                
+
                 // Create a policy object while not at end of file 
-                Policy policy = new Policy(insPolicyNum, insPolicyProvider, personFirstName, personLastName,
-                                            aAge, personSmokingStatus, personHeight, personWeight);
+                Policy policy = new Policy(insPolicyNum, insPolicyProvider, pHolder);
 
             
                 // Add object to ArrayList<Policy> policies
@@ -64,36 +66,20 @@ public class Project_Katie_Eberhard extends Policy {
             //Close file
             inputFile.close();     
             
-            //Create smoking and nonsmoking accumulators
-            int smokers = 0;
-            int nonsmokers = 0;
-
-            //Create a for loop that displays all the Policy objects that are stored in ArrayList + BMI + policy cost
-            for(Policy p : policies)
-            {
-                
-                
-                System.out.printf("Policy Numer: %s\n", p.getPolicyNum());
-                System.out.printf("Provider Name: %s\n", p.getProvider());
-                System.out.printf("Policyholder's First Name: %s\n", p.getFirstName());
-                System.out.printf("Policyholder's Last Name: %s\n", p.getLastName());
-                System.out.printf("Policyholder's Age: %d\n", p.getAge());
-                System.out.printf("Policyholder's Smoking Status: %s\n", p.getSmokingStatus());
-                if(p.getSmokingStatus().equalsIgnoreCase("smoker"))
-                     smokers++;
-                else
-                    nonsmokers++;
-                
-                System.out.printf("Policyholder's Height: %.1f inches\n", p.getHeight());
-                System.out.printf("Policyholder's Weight: %.1f pounds\n", p.getWeight());
-                System.out.printf("Policyholder's BMI: %.2f\n", p.calculateBMI(p.getWeight(), p.getHeight()));
-                System.out.printf("Policy Price: $%.2f\n\n", p.priceOfPolicy());
-
-            }
-                System.out.println("The number of policies with a smoker is: " + smokers);
-                System.out.println("The number of policies with a non-smoker is: " + nonsmokers);
-
             
+        
+            int smokers = 0;
+            int policyCount = 0;
+            for(Policy p : policies)
+                {
+                    System.out.println(p);
+                    policyCount = p.getInstanceCount();
+                    smokers = p.getSmokerCount();
+                }
+            int nonSmokers = policyCount - smokers;
+            System.out.println("There were " + policyCount + " Policy objects created.");    
+            System.out.println("The number of policies with a smoker is: " + smokers);
+            System.out.println("The number of policies with a non-smoker is: " + nonSmokers);
         }
         
         catch(IOException e)//If something goes wrong, an IOException is "thrown" to us, and we "catch" it and deal with it
